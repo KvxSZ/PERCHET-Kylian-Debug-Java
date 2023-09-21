@@ -17,7 +17,7 @@ public class AnalyticsCounter {
 
 	public List<String> getSymptoms(){
 		// Retrieves the list of symptoms using ISymptomReader's GetSymptoms method
-		List<String> symptoms = reader.GetSymptoms();
+		List<String> symptoms = reader.getSymptoms();
 
 		// Returns the list of symptoms
 		return symptoms;

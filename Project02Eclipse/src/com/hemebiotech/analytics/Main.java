@@ -7,13 +7,8 @@ public class Main {
 
     public static void main(String args[]){
 
-        // Instanciation ISymptomReader
         ISymptomReader symptomReader = new ReadSymptomDataFromFile("symptoms.txt");
-
-        // Instanciation ISymptomWriter
         ISymptomWriter symptomWriter = new WriteSymptomDataToFile();
-
-        // Instanciation AnalyticsCounter
         AnalyticsCounter analyticsCounter = new AnalyticsCounter(symptomReader, symptomWriter);
 
         // Calling AnalyticsCounter methods

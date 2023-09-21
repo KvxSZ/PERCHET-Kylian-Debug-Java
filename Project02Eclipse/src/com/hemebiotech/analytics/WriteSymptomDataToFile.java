@@ -17,7 +17,6 @@ public class WriteSymptomDataToFile implements ISymptomWriter{
                 // Create the result.out file
                 FileWriter writer = new FileWriter("result.out");
 
-                // Loop on the map symptoms
                 for (String symptom : symptoms.keySet()){
 
                     // Get the count of symptom
