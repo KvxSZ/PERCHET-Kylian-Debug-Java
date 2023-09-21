@@ -10,11 +10,21 @@ public class WriteSymptomDataToFile implements ISymptomWriter{
     public void writeSymptoms(Map<String, Integer> symptoms) {
 
         try {
+
+            // Check if the symptoms map is not empty
             if (!symptoms.isEmpty()){
+
+                // Create the result.out file
                 FileWriter writer = new FileWriter("result.out");
+
+                // Loop on the map symptoms
                 for (String symptom : symptoms.keySet()){
-                    int nbr = symptoms.get(symptom);
-                    writer.write("symptom: " + nbr + "\n");
+
+                    // Get the count of symptom
+                    int count = symptoms.get(symptom);
+
+                    // Writes the symptom and counter to the result.out file
+                    writer.write("symptom: " + count + "\n");
                 }
                 writer.close();
             }

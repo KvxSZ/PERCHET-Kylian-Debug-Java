@@ -24,13 +24,19 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	@Override
 	public List<String> GetSymptoms() {
+
+		// Create an ArrayList to store the results
 		ArrayList<String> result = new ArrayList<String>();
-		
+
+		// Checks if the file exists
 		if (filepath != null) {
 			try {
+
+				// Get the file
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
 				String line = reader.readLine();
-				
+
+				// Loop over all the lines in the file to send them to the ArrayList result
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
@@ -40,7 +46,8 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				e.printStackTrace();
 			}
 		}
-		
+
+		// Return the result ArrayList
 		return result;
 	}
 

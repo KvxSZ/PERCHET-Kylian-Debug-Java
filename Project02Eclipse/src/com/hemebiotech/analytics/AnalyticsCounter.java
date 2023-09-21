@@ -76,7 +76,7 @@ public class AnalyticsCounter {
 		return sortedSymptoms;
 	}
 
-
+	// Call the writeSymptoms method
 	public void writeSymptoms(Map<String, Integer> symptoms){
 		writer.writeSymptoms(symptoms);
 	}
