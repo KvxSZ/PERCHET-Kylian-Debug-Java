@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Main {
 
-    public void main(){
+    public static void main(String args[]){
 
         // Instanciation ISymptomReader
         ISymptomReader symptomReader = new ReadSymptomDataFromFile("symptoms.txt");

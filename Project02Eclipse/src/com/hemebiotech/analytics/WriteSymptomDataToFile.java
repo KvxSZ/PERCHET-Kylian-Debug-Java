@@ -24,7 +24,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter{
                     int count = symptoms.get(symptom);
 
                     // Writes the symptom and counter to the result.out file
-                    writer.write("symptom: " + count + "\n");
+                    writer.write(symptom + ": " + count + "\n");
                 }
                 writer.close();
             }
