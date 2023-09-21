@@ -36,7 +36,7 @@ public class AnalyticsCounter {
 		System.out.println("number of dialated pupils: " + pupilCount);
 		
 		// next generate output
-		FileWriter writer = new FileWriter("result.txt");
+		FileWriter writer = new FileWriter("result.out");
 		writer.write("headache: " + headacheCount + "\n");
 		writer.write("rash: " + rashCount + "\n");
 		writer.write("dialated pupils: " + pupilCount + "\n");
