@@ -1,45 +1,87 @@
 package com.hemebiotech.analytics;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.util.*;
 
 public class AnalyticsCounter {
-	private static int headacheCount = 0;	// initialize to 0
-	private static int rashCount = 0;		// initialize to 0
-	private static int pupilCount = 0;		// initialize to 0
-	
-	public static void main(String[] args) throws Exception {
-		// first get input
-		BufferedReader reader = new BufferedReader(new FileReader("symptoms.txt"));
-		String line = reader.readLine();
 
-		int i = 0;
-		while (line != null) {
-			i++;
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headacheCount++;
-			}
-			else if (line.equals("rash")) {
-				rashCount++;
-			}
-			else if (line.contains("dialated pupils")) {
-				pupilCount++;
-			}
+	private final ISymptomReader reader;
+	private final ISymptomWriter writer;
 
+
+	// Create the constructor
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+		this.reader = reader;
+		this.writer = writer;
+	}
+
+	public List<String> getSymptoms(){
+		// Retrieves the list of symptoms using ISymptomReader's GetSymptoms method
+		List<String> symptoms = reader.GetSymptoms();
+
+		// Returns the list of symptoms
+		return symptoms;
+	}
+
+	public Map<String, Integer> countSymptoms(List<String> symptoms){
+
+		// Create a Map to store symptom counts
+		Map<String, Integer> symptomCount = new HashMap<>();
+
+		// Browse the map of symptoms
+		for (String symptom : symptoms){
+
+			//Check if the symptom is already in the map
+			if(symptomCount.containsKey(symptom)) {
+
+				//If so, it adds one to the counter
+				symptomCount.put(symptom, symptomCount.get(symptom) + 1);
+
+			} else {
+
+				// If not, add the symptom to the map with an initial counter of 1
+				symptomCount.put(symptom, 1);
+
+			}
 		}
 
-		System.out.println("number of headaches: " + headacheCount);
-		System.out.println("number of rash: " + rashCount);
-		System.out.println("number of dialated pupils: " + pupilCount);
-		
-		// next generate output
-		FileWriter writer = new FileWriter("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
+		// Return the map with the symptom counts
+		return symptomCount;
 	}
+
+
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms){
+
+		// Creation of the list of entries
+		List<Map.Entry<String, Integer>> entryList = new ArrayList<>(symptoms.entrySet());
+
+		// Use a comparator to sort alphabetically
+		Collections.sort(entryList, new Comparator<Map.Entry<String, Integer>>() {
+			@Override
+			public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+				return entry1.getKey().compareTo(entry2.getKey());
+			}
+		});
+
+
+		// Create a new sorted map
+		Map<String, Integer> sortedSymptoms = new LinkedHashMap<>();
+
+		// Add sorted items to the new map
+		for (Map.Entry<String, Integer> entry : entryList){
+			sortedSymptoms.put(entry.getKey(), entry.getValue());
+		}
+
+		// Returns the new sorted map
+		return sortedSymptoms;
+	}
+
+
+	public void writeSymptoms(Map<String, Integer> symptoms){
+		writer.writeSymptoms(symptoms);
+	}
+
+
 }
+
+
